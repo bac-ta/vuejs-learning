@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="vue.js"></script>
+    <div id="obj">
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+        <p v-once>
+            {{ content }}- {{ viewContent() }}
+        </p>
+        <p v-html="htmlTag"></p>
+<!--        <button v-on:click="tangGiaTri">Button</button>-->
+
+        <button @click="bienDem++">An di</button>
+
+        <p>Gia Tri:{{ bienDem }} {{ bienDem > 5 ? 'Please stop' : 'Oke' }}</p>
+        <p v-on:mousemove="tinhToaDo"> Toa do cua chuot : {{ x }}/{{ y }}
+        <p v-on:mousemove="dungSuKien">Dung su kien</p>
+        <input type="text" @keyup.enter="alertMsg"/>
+    </div>
+</head>
+<body>
+<script>
+    'use strict';
+    new Vue({
+        el: '#obj',
+        data: {
+            title: 'Chao entropy',
+            content: 'Bac dep zai',
+            htmlTag: '<select><option>bac</option>' +
+                '<option>phuong</option></select>',
+            bienDem: 0,
+            x: 0,
+            y: 0,
+        },
+        methods: {
+            viewContent: function () {
+                this.content = 'Bắc còn giỏi nứa';
+                return this.content;
+            },
+            tangGiaTri: function () {
+                this.bienDem++;
+            },
+            tinhToaDo: function (event) {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            dungSuKien: function (event) {
+                event.stopPropagation();
+            },
+            alertMsg: function () {
+                alert("Welcom Entropy");
+            },
+        },
+        computed:{
+            tangGiaTri: function () {
+                this.bienDem++;
+            }
+        }
+
+    });
+
+</script>
+</body>
+</html>
